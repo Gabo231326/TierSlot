@@ -26,7 +26,6 @@ export async function GET(
   try {
     const r = await fetch(url, { cache: "no-store" });
 
-    // Resiliente a respuestas no-JSON
     const text = await r.text();
     let data: unknown;
     try {
