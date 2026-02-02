@@ -1,22 +1,41 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "tierslot",
+  title: {
+    default: "TierSlot",
+    template: "%s | TierSlot",
+  },
   description: "Rankings, bonos y lealtad",
 };
+
+function Navbar() {
+  return (
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-black/40 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+        <Link href="/" className="font-extrabold tracking-tight text-xl">
+          Tier<span className="text-indigo-400">Slot</span>
+        </Link>
+
+        <nav className="flex items-center gap-6 text-sm text-white/80">
+          <Link className="hover:text-white" href="/leaderboards">
+            Rankings
+          </Link>
+          <Link className="hover:text-white" href="/bonuses">
+            Bonos
+          </Link>
+          <Link className="hover:text-white" href="/loyalty">
+            Lealtad
+          </Link>
+          <Link className="hover:text-white" href="/profile">
+            Mi perfil
+          </Link>
+        </nav>
+      </div>
+    </header>
+  );
+}
 
 export default function RootLayout({
   children,
@@ -25,43 +44,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-white text-gray-900`}
-      >
-        {/* HEADER / NAVBAR */}
-        <header className="border-b">
-          <nav className="mx-auto max-w-6xl px-4 py-3 flex gap-6 items-center">
-            <Link href="/" className="font-bold text-lg">
-              tierslot
-            </Link>
-            <Link href="/leaderboards" className="hover:underline">
-              Rankings
-            </Link>
-            <Link href="/bonuses" className="hover:underline">
-              Bonos
-            </Link>
-            <Link href="/loyalty" className="hover:underline">
-              Lealtad
-            </Link>
-            <Link href="/profile" className="hover:underline">
-              Mi perfil
-            </Link>
-          </nav>
-        </header>
-
-        {/* CONTENIDO */}
-        <main className="mx-auto max-w-6xl px-4 py-6">
+      <body className="min-h-screen bg-[#070A12] text-white">
+        {/* Fondo con glow/gradientes */}
+        <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.25),transparent_45%),radial-gradient(circle_at_30%_30%,rgba(236,72,153,0.18),transparent_40%)]" />
+        <div className="relative">
+          <Navbar />
           {children}
-        </main>
-
-        {/* FOOTER */}
-        <footer className="border-t mt-auto">
-          <div className="mx-auto max-w-6xl px-4 py-4 text-sm text-gray-500">
-            18+ | Juega con responsabilidad 
-          </div>
-        </footer>
+        </div>
       </body>
     </html>
   );
 }
-
