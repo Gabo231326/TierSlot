@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TierSlot",
+  title: "tierslot",
   description: "Rankings, bonos y lealtad",
 };
 
@@ -32,7 +32,7 @@ export default function RootLayout({
         <header className="border-b">
           <nav className="mx-auto max-w-6xl px-4 py-3 flex gap-6 items-center">
             <Link href="/" className="font-bold text-lg">
-              TierSlot
+              tierslot
             </Link>
             <Link href="/leaderboards" className="hover:underline">
               Rankings
@@ -57,7 +57,7 @@ export default function RootLayout({
         {/* FOOTER */}
         <footer className="border-t mt-auto">
           <div className="mx-auto max-w-6xl px-4 py-4 text-sm text-gray-500">
-            18+ | Juega con responsabilidad | Este sitio no está afiliado a Shuffle
+            18+ | Juega con responsabilidad 
           </div>
         </footer>
       </body>
