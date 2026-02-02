@@ -2,10 +2,8 @@
   "name": "api",
   "version": "1.0.0",
   "type": "module",
-  "main": "index.js",
   "scripts": {
-    "start": "node server.js"   		
-    "test": "echo \"Error\" && exit 1"
+    "start": "node server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -14,4 +12,3 @@
     "node-fetch": "^3.3.2"
   }
 }
-
