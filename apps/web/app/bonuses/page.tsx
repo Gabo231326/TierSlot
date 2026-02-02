@@ -65,7 +65,7 @@ export default async function BonusesPage() {
                 href={b.url}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-block mt-4 w-full text-center rounded-xl bg-black text-white py-2 text-sm font-semibold hover:opacity-90"
+                className="inline-block mt-4 w-full text-center rounded-xl bg-black text-gray-900 py-2 text-sm font-semibold hover:opacity-90"
               >
                 Ver bono
               </a>

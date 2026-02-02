@@ -1,79 +1,57 @@
 @import "tailwindcss";
 
-/* ====== BASE OSCURA ====== */
+/* Fondo oscuro tipo JammySlots */
 :root {
   --background: #070A12;
-  --foreground: #F5F5F7; /* texto claro en fondo oscuro */
+  --foreground: #000000;   /* TEXTO NEGRO GLOBAL */
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
+  color: #000000;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
 }
 
-html, body {
-  min-height: 100%;
+/* ====== FORZAR TEXTO NEGRO EN TODO ====== */
+
+/* Todo texto básico */
+html, body,
+h1, h2, h3, h4, h5, h6,
+p, span, div, li {
+  color: #000000 !important;
 }
 
-/* ====== REGLA CLAVE: SI EL CONTENEDOR ES CLARO, TEXTO OSCURO ======
-   Esto arregla justo lo que te pasa: cards/tabla blancas con letras pálidas.
-*/
+/* Tablas (Ranking) */
+table, th, td {
+  color: #000000 !important;
+}
 
-/* Cards claras típicas (blancas o muy claras) */
+/* Cards blancas y contenedores */
 .bg-white,
-.bg-gray-50,
-.bg-slate-50,
-.bg-zinc-50 {
-  color: #111827 !important; /* gris muy oscuro */
+.bg-white\/5,
+.bg-white\/10,
+.rounded-3xl,
+.rounded-2xl {
+  color: #000000 !important;
 }
 
-/* Tablas dentro de cards claras */
-.bg-white table,
-.bg-gray-50 table,
-.bg-slate-50 table,
-.bg-zinc-50 table {
-  color: #111827 !important;
+/* Links visibles */
+a {
+  color: #000000 !important;
+  text-decoration: underline;
 }
 
-.bg-white th,
-.bg-gray-50 th,
-.bg-slate-50 th,
-.bg-zinc-50 th {
-  color: #374151 !important; /* encabezados */
+a:hover {
+  color: #333333 !important;
 }
 
-.bg-white td,
-.bg-gray-50 td,
-.bg-slate-50 td,
-.bg-zinc-50 td {
-  color: #111827 !important; /* filas */
+/* Inputs y textos dentro de cajas blancas */
+input, textarea {
+  color: #000000 !important;
 }
 
-/* Inputs o bloques grises dentro de cards claras (como el recuadro "Wager") */
-.bg-white input,
-.bg-gray-50 input,
-.bg-slate-50 input,
-.bg-zinc-50 input,
-.bg-white .bg-gray-100,
-.bg-white .bg-gray-50,
-.bg-gray-50 .bg-gray-100,
-.bg-slate-50 .bg-gray-100,
-.bg-zinc-50 .bg-gray-100 {
-  color: #111827 !important;
-}
-
-/* Links dentro de contenedores claros */
-.bg-white a,
-.bg-gray-50 a,
-.bg-slate-50 a,
-.bg-zinc-50 a {
-  color: #1D4ED8 !important; /* azul */
-}
-
-.bg-white a:hover,
-.bg-gray-50 a:hover,
-.bg-slate-50 a:hover,
-.bg-zinc-50 a:hover {
-  color: #1E40AF !important;
+/* Botones oscuros con texto blanco (para que sigan viéndose bien) */
+button.bg-black,
+a.bg-black {
+  color: white !important;
 }

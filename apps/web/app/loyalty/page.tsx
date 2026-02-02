@@ -51,7 +51,7 @@ export default function LoyaltyPage() {
 
         <a
           href="/profile"
-          className="inline-block mt-6 rounded-xl bg-black text-white px-6 py-3 text-sm font-semibold hover:opacity-90"
+          className="inline-block mt-6 rounded-xl bg-black text-gray-900 px-6 py-3 text-sm font-semibold hover:opacity-90"
         >
           Ver mi perfil
         </a>

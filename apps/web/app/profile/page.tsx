@@ -23,7 +23,7 @@ export default function ProfilePage() {
           </div>
 
           <button
-            className="mt-4 w-full rounded-xl bg-black text-white py-2 text-sm font-semibold hover:opacity-90"
+            className="mt-4 w-full rounded-xl bg-black text-gray-900 py-2 text-sm font-semibold hover:opacity-90"
             disabled
             title="Próximamente"
           >
@@ -57,7 +57,7 @@ export default function ProfilePage() {
 
         <a
           href="/bonuses"
-          className="inline-block mt-6 rounded-xl bg-black text-white px-6 py-3 text-sm font-semibold hover:opacity-90"
+          className="inline-block mt-6 rounded-xl bg-black text-gray-900 px-6 py-3 text-sm font-semibold hover:opacity-90"
         >
           Ver bonos disponibles
         </a>
