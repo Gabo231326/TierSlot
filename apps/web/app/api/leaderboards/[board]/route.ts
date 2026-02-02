@@ -1,13 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-type Context = {
-  params: {
-    board: string;
-  };
-};
-
-export async function GET(request: Request, context: Context) {
-  const board = context.params?.board;
+export async function GET(
+  _req: NextRequest,
+  { params }: { params: Promise<{ board: string }> }
+) {
+  const { board } = await params;
   const base = process.env.API_BASE;
 
   if (!base) {
@@ -29,7 +26,7 @@ export async function GET(request: Request, context: Context) {
   try {
     const r = await fetch(url, { cache: "no-store" });
 
-    // Por si el backend responde vacío o no-JSON
+    // Resiliente a respuestas no-JSON
     const text = await r.text();
     let data: unknown;
     try {
