@@ -1,17 +1,16 @@
 @import "tailwindcss";
 
-/* ====== PALETA BASE (LEGIBLE EN FONDOS OSCUROS) ====== */
+/* ====== BASE CON TEXTO NEGRO ====== */
 :root {
-  --background: #070A12;   /* fondo principal */
-  --foreground: #F5F5F7;   /* texto principal (blanco nítido) */
-  --muted: #9CA3AF;        /* texto secundario */
+  --background: #070A12;   /* mantenemos fondo oscuro */
+  --foreground: #000000;   /* 👉 TEXTO NEGRO GLOBAL */
 }
 
-/* Mantiene coherencia aunque el usuario tenga modo claro */
+/* Forzamos texto negro aunque el navegador tenga modo claro/oscuro */
 @media (prefers-color-scheme: light) {
   :root {
     --background: #070A12;
-    --foreground: #F5F5F7;
+    --foreground: #000000;
   }
 }
 
@@ -21,47 +20,43 @@ body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
 }
 
-/* Evita scroll raro por gradientes */
 html, body {
   min-height: 100%;
 }
 
-/* ====== MEJORA DE LEGIBILIDAD GLOBAL ====== */
+/* ====== FORZAR TEXTO NEGRO EN TODO ====== */
 
-/* Tablas (Leaderboards y similares) */
-table {
-  color: #F5F5F7 !important;
-}
-
-th {
-  color: #9CA3AF !important; /* encabezados más suaves */
-}
-
+/* Tablas (Rankings) */
+table,
+th,
 td {
-  color: #E5E7EB !important; /* filas más visibles */
+  color: #000000 !important;
 }
 
-/* Todas las "cards" y contenedores redondeados */
+/* Cards y contenedores redondeados */
 .rounded-3xl,
-.rounded-2xl {
-  color: #F5F5F7 !important;
+.rounded-2xl,
+.bg-white\/5,
+.bg-white\/10,
+.bg-black\/30,
+.bg-black\/40 {
+  color: #000000 !important;
 }
 
-/* Títulos dentro de cards */
-h2, h3, h4 {
-  color: #F5F5F7 !important;
+/* Títulos y textos */
+h1, h2, h3, h4, h5, h6,
+p,
+span,
+div {
+  color: #000000 !important;
 }
 
-/* Texto secundario en cards */
-p {
-  color: #D1D5DB !important; /* gris claro legible */
-}
-
-/* Links dentro de cards */
+/* Links */
 a {
-  color: #93C5FD !important; /* azul claro tipo Jammmyslots */
+  color: #000000 !important;
+  text-decoration: underline;
 }
 
 a:hover {
-  color: #BFDBFE !important;
+  color: #333333 !important;
 }
