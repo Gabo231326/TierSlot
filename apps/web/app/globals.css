@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
-/* ====== BASE OSCURA (sitio tipo casino) ====== */
+/* ====== BASE OSCURA ====== */
 :root {
   --background: #070A12;
-  --foreground: #F5F5F7; /* texto claro sobre fondo oscuro */
+  --foreground: #F5F5F7;
 }
 
 body {
@@ -17,69 +17,62 @@ html, body {
 }
 
 /* =========================================================
-   FIX GLOBAL: CONTENEDORES CLAROS (cards blancas) → TEXTO NEGRO
-   + QUITAR TRANSPARENCIA (opacity) PARA QUE SE LEA SI O SI
-   Aplica a: Ranking, Bonos, Lealtad, Perfil (todas las páginas)
+   FIX DEFINITIVO: SI EL CONTENEDOR ES CLARO → TEXTO NEGRO
+   Cubre bg-white, bg-white/xx, bg-gray-50, etc.
+   Además fuerza opacity: 1 para evitar texto "transparente".
    ========================================================= */
 
-/* Detecta fondos claros típicos de tus cards */
+/* ✅ Contenedores claros (cards/tablas) */
 .bg-white,
-.bg-gray-50,
-.bg-slate-50,
-.bg-zinc-50,
-.bg-neutral-50 {
-  color: #111827 !important; /* negro/gris muy oscuro */
+.bg-gray-50, .bg-slate-50, .bg-zinc-50, .bg-neutral-50,
+.bg-gray-100, .bg-slate-100, .bg-zinc-100, .bg-neutral-100,
+[class*="bg-white/"],
+[class*="bg-gray-50"], [class*="bg-slate-50"], [class*="bg-zinc-50"], [class*="bg-neutral-50"],
+[class*="bg-gray-100"], [class*="bg-slate-100"], [class*="bg-zinc-100"], [class*="bg-neutral-100"] {
+  color: #111827 !important;
 }
 
-/* Todo lo que está dentro de cards claras: texto oscuro y SIN transparencia */
+/* ✅ TODO lo que esté dentro de contenedores claros */
 .bg-white *,
-.bg-gray-50 *,
-.bg-slate-50 *,
-.bg-zinc-50 *,
-.bg-neutral-50 * {
+.bg-gray-50 *, .bg-slate-50 *, .bg-zinc-50 *, .bg-neutral-50 *,
+.bg-gray-100 *, .bg-slate-100 *, .bg-zinc-100 *, .bg-neutral-100 *,
+[class*="bg-white/"] *,
+[class*="bg-gray-50"] *, [class*="bg-slate-50"] *, [class*="bg-zinc-50"] *, [class*="bg-neutral-50"] *,
+[class*="bg-gray-100"] *, [class*="bg-slate-100"] *, [class*="bg-zinc-100"] *, [class*="bg-neutral-100"] * {
   color: #111827 !important;
   opacity: 1 !important;
 }
 
-/* Tablas dentro de cards claras */
-.bg-white table,
+/* ✅ Tablas dentro de contenedores claros */
+table, th, td {
+  opacity: 1 !important;
+}
+
+/* ✅ Encabezados más suaves (pero legibles) en contenedores claros */
 .bg-white th,
-.bg-white td,
-.bg-gray-50 table,
-.bg-gray-50 th,
-.bg-gray-50 td,
-.bg-slate-50 table,
-.bg-slate-50 th,
-.bg-slate-50 td,
-.bg-zinc-50 table,
-.bg-zinc-50 th,
-.bg-zinc-50 td,
-.bg-neutral-50 table,
-.bg-neutral-50 th,
-.bg-neutral-50 td {
-  color: #111827 !important;
-  opacity: 1 !important;
+.bg-gray-50 th, .bg-slate-50 th, .bg-zinc-50 th, .bg-neutral-50 th,
+.bg-gray-100 th, .bg-slate-100 th, .bg-zinc-100 th, .bg-neutral-100 th,
+[class*="bg-white/"] th {
+  color: #374151 !important;
 }
 
-/* Links dentro de cards claras */
+/* ✅ Links dentro de contenedores claros */
 .bg-white a,
-.bg-gray-50 a,
-.bg-slate-50 a,
-.bg-zinc-50 a,
-.bg-neutral-50 a {
-  color: #1D4ED8 !important; /* azul legible */
+.bg-gray-50 a, .bg-slate-50 a, .bg-zinc-50 a, .bg-neutral-50 a,
+.bg-gray-100 a, .bg-slate-100 a, .bg-zinc-100 a, .bg-neutral-100 a,
+[class*="bg-white/"] a {
+  color: #1D4ED8 !important;
   opacity: 1 !important;
 }
 
 .bg-white a:hover,
-.bg-gray-50 a:hover,
-.bg-slate-50 a:hover,
-.bg-zinc-50 a:hover,
-.bg-neutral-50 a:hover {
+.bg-gray-50 a:hover, .bg-slate-50 a:hover, .bg-zinc-50 a:hover, .bg-neutral-50 a:hover,
+.bg-gray-100 a:hover, .bg-slate-100 a:hover, .bg-zinc-100 a:hover, .bg-neutral-100 a:hover,
+[class*="bg-white/"] a:hover {
   color: #1E40AF !important;
 }
 
-/* Botones negros: mantener texto blanco */
+/* ✅ Botones negros: texto blanco */
 a.bg-black,
 button.bg-black {
   color: #ffffff !important;
