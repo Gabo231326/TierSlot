@@ -44,3 +44,29 @@ button.bg-black {
   color: #FFFFFF !important;
   opacity: 1 !important;
 }
+
+/* ====== FIX ESPECÍFICO PARA USERNAMES Y WAGER ====== */
+
+/* Fuerza blanco puro y sin transparencia en nombres de usuario */
+td.font-medium,
+td[class*="font-medium"],
+td[class*="username"],
+td[class*="usuario"] {
+  color: #FFFFFF !important;
+  opacity: 1 !important;
+}
+
+/* Fuerza blanco puro en números de wager */
+td[class*="tabular-nums"],
+td[class*="wager"] {
+  color: #FFFFFF !important;
+  opacity: 1 !important;
+}
+
+/* También para las tarjetas Top 3 */
+.rounded-2xl.bg-black\/20 *,
+.rounded-2xl.bg-black\/30 *,
+.rounded-2xl.border * {
+  color: #FFFFFF !important;
+  opacity: 1 !important;
+}
