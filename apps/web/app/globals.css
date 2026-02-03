@@ -1,57 +1,87 @@
 @import "tailwindcss";
 
-/* Fondo oscuro tipo JammySlots */
+/* ====== BASE OSCURA (sitio tipo casino) ====== */
 :root {
   --background: #070A12;
-  --foreground: #000000;   /* TEXTO NEGRO GLOBAL */
+  --foreground: #F5F5F7; /* texto claro sobre fondo oscuro */
 }
 
 body {
   background: var(--background);
-  color: #000000;
+  color: var(--foreground);
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
 }
 
-/* ====== FORZAR TEXTO NEGRO EN TODO ====== */
-
-/* Todo texto básico */
-html, body,
-h1, h2, h3, h4, h5, h6,
-p, span, div, li {
-  color: #000000 !important;
+html, body {
+  min-height: 100%;
 }
 
-/* Tablas (Ranking) */
-table, th, td {
-  color: #000000 !important;
-}
+/* =========================================================
+   FIX GLOBAL: CONTENEDORES CLAROS (cards blancas) → TEXTO NEGRO
+   + QUITAR TRANSPARENCIA (opacity) PARA QUE SE LEA SI O SI
+   Aplica a: Ranking, Bonos, Lealtad, Perfil (todas las páginas)
+   ========================================================= */
 
-/* Cards blancas y contenedores */
+/* Detecta fondos claros típicos de tus cards */
 .bg-white,
-.bg-white\/5,
-.bg-white\/10,
-.rounded-3xl,
-.rounded-2xl {
-  color: #000000 !important;
+.bg-gray-50,
+.bg-slate-50,
+.bg-zinc-50,
+.bg-neutral-50 {
+  color: #111827 !important; /* negro/gris muy oscuro */
 }
 
-/* Links visibles */
-a {
-  color: #000000 !important;
-  text-decoration: underline;
+/* Todo lo que está dentro de cards claras: texto oscuro y SIN transparencia */
+.bg-white *,
+.bg-gray-50 *,
+.bg-slate-50 *,
+.bg-zinc-50 *,
+.bg-neutral-50 * {
+  color: #111827 !important;
+  opacity: 1 !important;
 }
 
-a:hover {
-  color: #333333 !important;
+/* Tablas dentro de cards claras */
+.bg-white table,
+.bg-white th,
+.bg-white td,
+.bg-gray-50 table,
+.bg-gray-50 th,
+.bg-gray-50 td,
+.bg-slate-50 table,
+.bg-slate-50 th,
+.bg-slate-50 td,
+.bg-zinc-50 table,
+.bg-zinc-50 th,
+.bg-zinc-50 td,
+.bg-neutral-50 table,
+.bg-neutral-50 th,
+.bg-neutral-50 td {
+  color: #111827 !important;
+  opacity: 1 !important;
 }
 
-/* Inputs y textos dentro de cajas blancas */
-input, textarea {
-  color: #000000 !important;
+/* Links dentro de cards claras */
+.bg-white a,
+.bg-gray-50 a,
+.bg-slate-50 a,
+.bg-zinc-50 a,
+.bg-neutral-50 a {
+  color: #1D4ED8 !important; /* azul legible */
+  opacity: 1 !important;
 }
 
-/* Botones oscuros con texto blanco (para que sigan viéndose bien) */
-button.bg-black,
-a.bg-black {
-  color: white !important;
+.bg-white a:hover,
+.bg-gray-50 a:hover,
+.bg-slate-50 a:hover,
+.bg-zinc-50 a:hover,
+.bg-neutral-50 a:hover {
+  color: #1E40AF !important;
+}
+
+/* Botones negros: mantener texto blanco */
+a.bg-black,
+button.bg-black {
+  color: #ffffff !important;
+  opacity: 1 !important;
 }
