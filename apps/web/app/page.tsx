@@ -21,7 +21,7 @@ export default async function HomePage() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-10">
       {/* HERO */}
-      <section className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 md:p-12">
+      <section className="relative overflow-hidden rounded-3xl border border-white/10 bg-black/30/5 p-8 md:p-12">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(99,102,241,0.35),transparent_45%),radial-gradient(circle_at_70%_40%,rgba(236,72,153,0.25),transparent_45%)]" />
         <div className="relative">
           <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs text-white/70">
@@ -40,7 +40,7 @@ export default async function HomePage() {
           <div className="mt-7 flex flex-wrap gap-3">
             <a
               href="/leaderboards"
-              className="rounded-xl bg-white text-black px-6 py-3 text-sm font-semibold hover:opacity-90"
+              className="rounded-xl bg-black/30 text-black px-6 py-3 text-sm font-semibold hover:opacity-100"
             >
               Ver Leaderboard
             </a>
@@ -57,7 +57,7 @@ export default async function HomePage() {
       {/* GRID */}
       <section className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-3">
         {/* Top 5 */}
-        <div className="lg:col-span-2 rounded-3xl border border-white/10 bg-white/5 overflow-hidden">
+        <div className="lg:col-span-2 rounded-3xl border border-white/10 bg-black/30/5 overflow-hidden">
           <div className="flex items-center justify-between px-6 py-5">
             <h2 className="text-lg font-semibold">Top 5 actual</h2>
             <a
@@ -105,7 +105,7 @@ export default async function HomePage() {
 
         {/* Side cards */}
         <div className="space-y-6">
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <div className="rounded-3xl border border-white/10 bg-black/30/5 p-6">
             <h3 className="font-semibold">Bonos destacados</h3>
             <p className="mt-2 text-sm text-white/70">
               Encuentra promos y recompensas. Filtra por tipo y requisitos.
@@ -118,7 +118,7 @@ export default async function HomePage() {
             </a>
           </div>
 
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <div className="rounded-3xl border border-white/10 bg-black/30/5 p-6">
             <h3 className="font-semibold">Lealtad</h3>
             <p className="mt-2 text-sm text-white/70">
               Sube de nivel y desbloquea perks por actividad.

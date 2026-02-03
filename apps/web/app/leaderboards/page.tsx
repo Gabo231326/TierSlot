@@ -42,10 +42,10 @@ export default async function LeaderboardsPage() {
     <main className="p-2">
       <header className="mb-6">
         <h1 className="text-3xl font-bold">Leaderboards</h1>
-        <p className="text-sm text-gray-500 mt-1">
+        <p className="text-sm text-white/60 mt-1">
           Última actualización: {data.updatedAt}
         </p>
-        <p className="text-sm text-gray-600 mt-2">
+        <p className="text-sm text-white/70 mt-2">
           Ranking basado en el total apostado (wager) de apuestas completadas.
         </p>
       </header>
@@ -53,19 +53,19 @@ export default async function LeaderboardsPage() {
       {/* Top 3 */}
       <section className="grid gap-4 md:grid-cols-3 mb-8">
         {top3.map((e, i) => (
-          <div key={i} className="rounded-2xl border p-4 shadow-sm bg-white">
+          <div key={i} className="rounded-2xl border p-4 shadow-sm bg-black/30">
             <div className="flex items-center justify-between">
               <span className="text-2xl">{medal(i)}</span>
-              <span className="text-xs text-gray-500">Puesto #{i + 1}</span>
+              <span className="text-xs text-white/60">Puesto #{i + 1}</span>
             </div>
 
             <div className="mt-3">
               <div className="text-lg font-semibold">{e.username}</div>
-              <div className="text-sm text-gray-500">Usuario</div>
+              <div className="text-sm text-white/60">Usuario</div>
             </div>
 
-            <div className="mt-4 rounded-xl bg-gray-50 p-3">
-              <div className="text-xs text-gray-500">Wager</div>
+            <div className="mt-4 rounded-xl bg-black/20 p-3">
+              <div className="text-xs text-white/60">Wager</div>
               <div className="text-2xl font-bold tabular-nums">
                 {formatCL(e.wagerAmount)}
               </div>
@@ -75,10 +75,10 @@ export default async function LeaderboardsPage() {
       </section>
 
       {/* Tabla */}
-      <section className="rounded-2xl border overflow-hidden bg-white">
-        <div className="px-4 py-3 border-b bg-gray-50 flex items-center justify-between">
+      <section className="rounded-2xl border overflow-hidden bg-black/30">
+        <div className="px-4 py-3 border-b bg-black/20 flex items-center justify-between">
           <h2 className="font-semibold">Ranking (Top 50)</h2>
-          <span className="text-xs text-gray-500">
+          <span className="text-xs text-white/60">
             Mostrando {Math.min(50, entries.length)} jugadores
           </span>
         </div>
@@ -86,7 +86,7 @@ export default async function LeaderboardsPage() {
         <div className="overflow-x-auto">
           <table className="min-w-full border-collapse">
             <thead>
-              <tr className="text-sm text-gray-600">
+              <tr className="text-sm text-white/70">
                 <th className="px-4 py-3 text-left w-20">#</th>
                 <th className="px-4 py-3 text-left">Usuario</th>
                 <th className="px-4 py-3 text-right w-44">Wager</th>
@@ -98,10 +98,10 @@ export default async function LeaderboardsPage() {
                 return (
                   <tr
                     key={rank}
-                    className="border-t hover:bg-gray-50 transition-colors"
+                    className="border-t hover:bg-black/20 transition-colors"
                   >
-                    <td className="px-4 py-3 text-sm text-gray-700">{rank}</td>
-                    <td className="px-4 py-3 font-medium text-gray-900">
+                    <td className="px-4 py-3 text-sm text-white/80">{rank}</td>
+                    <td className="px-4 py-3 font-medium text-white">
                       {e.username}
                     </td>
                     <td className="px-4 py-3 text-right tabular-nums">
@@ -114,7 +114,7 @@ export default async function LeaderboardsPage() {
           </table>
 
           {entries.length === 0 ? (
-            <div className="p-4 text-sm text-gray-600">
+            <div className="p-4 text-sm text-white/70">
               Aún no hay datos para mostrar.
             </div>
           ) : null}
