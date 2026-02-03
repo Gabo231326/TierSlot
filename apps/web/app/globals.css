@@ -6,73 +6,59 @@
   --foreground: #F5F5F7;
 }
 
+html, body {
+  min-height: 100%;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
 }
 
-html, body {
-  min-height: 100%;
-}
-
 /* =========================================================
-   FIX DEFINITIVO: SI EL CONTENEDOR ES CLARO → TEXTO NEGRO
-   Cubre bg-white, bg-white/xx, bg-gray-50, etc.
-   Además fuerza opacity: 1 para evitar texto "transparente".
+   FIX: contenedores CLAROS (cards/tablas) => texto OSCURO y sin opacidad
+   Aplica a todas las páginas (Ranking, Bonos, Lealtad, Perfil)
    ========================================================= */
 
-/* ✅ Contenedores claros (cards/tablas) */
+/* Contenedores claros típicos */
 .bg-white,
 .bg-gray-50, .bg-slate-50, .bg-zinc-50, .bg-neutral-50,
-.bg-gray-100, .bg-slate-100, .bg-zinc-100, .bg-neutral-100,
-[class*="bg-white/"],
-[class*="bg-gray-50"], [class*="bg-slate-50"], [class*="bg-zinc-50"], [class*="bg-neutral-50"],
-[class*="bg-gray-100"], [class*="bg-slate-100"], [class*="bg-zinc-100"], [class*="bg-neutral-100"] {
+.bg-gray-100, .bg-slate-100, .bg-zinc-100, .bg-neutral-100 {
   color: #111827 !important;
 }
 
-/* ✅ TODO lo que esté dentro de contenedores claros */
+/* Todo dentro de contenedores claros: texto oscuro + opacidad 1 */
 .bg-white *,
 .bg-gray-50 *, .bg-slate-50 *, .bg-zinc-50 *, .bg-neutral-50 *,
-.bg-gray-100 *, .bg-slate-100 *, .bg-zinc-100 *, .bg-neutral-100 *,
-[class*="bg-white/"] *,
-[class*="bg-gray-50"] *, [class*="bg-slate-50"] *, [class*="bg-zinc-50"] *, [class*="bg-neutral-50"] *,
-[class*="bg-gray-100"] *, [class*="bg-slate-100"] *, [class*="bg-zinc-100"] *, [class*="bg-neutral-100"] * {
+.bg-gray-100 *, .bg-slate-100 *, .bg-zinc-100 *, .bg-neutral-100 * {
   color: #111827 !important;
   opacity: 1 !important;
 }
 
-/* ✅ Tablas dentro de contenedores claros */
-table, th, td {
+/* Encabezados un poco más suaves */
+.bg-white th,
+.bg-gray-50 th, .bg-slate-50 th, .bg-zinc-50 th, .bg-neutral-50 th,
+.bg-gray-100 th, .bg-slate-100 th, .bg-zinc-100 th, .bg-neutral-100 th {
+  color: #374151 !important;
   opacity: 1 !important;
 }
 
-/* ✅ Encabezados más suaves (pero legibles) en contenedores claros */
-.bg-white th,
-.bg-gray-50 th, .bg-slate-50 th, .bg-zinc-50 th, .bg-neutral-50 th,
-.bg-gray-100 th, .bg-slate-100 th, .bg-zinc-100 th, .bg-neutral-100 th,
-[class*="bg-white/"] th {
-  color: #374151 !important;
-}
-
-/* ✅ Links dentro de contenedores claros */
+/* Links dentro de contenedores claros */
 .bg-white a,
 .bg-gray-50 a, .bg-slate-50 a, .bg-zinc-50 a, .bg-neutral-50 a,
-.bg-gray-100 a, .bg-slate-100 a, .bg-zinc-100 a, .bg-neutral-100 a,
-[class*="bg-white/"] a {
+.bg-gray-100 a, .bg-slate-100 a, .bg-zinc-100 a, .bg-neutral-100 a {
   color: #1D4ED8 !important;
   opacity: 1 !important;
 }
 
 .bg-white a:hover,
 .bg-gray-50 a:hover, .bg-slate-50 a:hover, .bg-zinc-50 a:hover, .bg-neutral-50 a:hover,
-.bg-gray-100 a:hover, .bg-slate-100 a:hover, .bg-zinc-100 a:hover, .bg-neutral-100 a:hover,
-[class*="bg-white/"] a:hover {
+.bg-gray-100 a:hover, .bg-slate-100 a:hover, .bg-zinc-100 a:hover, .bg-neutral-100 a:hover {
   color: #1E40AF !important;
 }
 
-/* ✅ Botones negros: texto blanco */
+/* Botones negros: texto blanco */
 a.bg-black,
 button.bg-black {
   color: #ffffff !important;
