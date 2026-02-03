@@ -1,24 +1,12 @@
 @import "tailwindcss";
 
-/* ====== TEMA OSCURO UNIFORME ====== */
 :root {
   --background: #070A12;
-  --foreground: #F5F5F7;
 }
 
 html, body { min-height: 100%; }
 
 body {
   background: var(--background);
-  color: var(--foreground);
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
 }
-
-/* Links */
-a { color: #93C5FD; }
-a:hover { color: #BFDBFE; }
-
-/* Tablas: texto claro */
-table { color: #F5F5F7; }
-th { color: #CBD5E1; }
-td { color: #E5E7EB; }
