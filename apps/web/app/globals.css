@@ -96,3 +96,29 @@ textarea::-moz-selection {
   background: rgba(99, 102, 241, 0.35);
   color: #ffffff;
 }
+
+/* ==========================
+   FORZAR selección de texto (evitar blanco)
+   ========================== */
+*::selection {
+  background: rgba(99, 102, 241, 0.45) !important; /* índigo */
+  color: #ffffff !important;
+}
+
+*::-moz-selection {
+  background: rgba(99, 102, 241, 0.45) !important;
+  color: #ffffff !important;
+}
+
+/* ==========================
+   FORZAR selección de texto (evitar blanco en modo oscuro)
+   ========================== */
+*::selection {
+  background: rgba(99, 102, 241, 0.45) !important; /* índigo */
+  color: #ffffff !important;
+}
+
+*::-moz-selection {
+  background: rgba(99, 102, 241, 0.45) !important;
+  color: #ffffff !important;
+}
