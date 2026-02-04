@@ -10,12 +10,6 @@ app.use(express.json());
 // cache simple para evitar rate limit
 const cache = new Map();
 
-function maskUsername(u = "") {
-  if (!u) return "";
-  if (u.length <= 2) return "*".repeat(u.length);
-  return `${u[0]}${"*".repeat(Math.max(3, u.length - 2))}${u[u.length - 1]}`;
-}
-
 async function fetchShuffleStats() {
   const affiliateId = process.env.SHUFFLE_AFFILIATE_ID;
   if (!affiliateId) {
@@ -39,12 +33,19 @@ async function buildLeaderboard(cacheKey) {
 
   const raw = await fetchShuffleStats();
 
-  const entries = (raw || [])
+  // Ordenamos por wagerAmount REAL, pero NO lo mandamos al frontend
+  const ordered = (raw || [])
     .map((x) => ({
-      username: maskUsername(x.username),
-      wagerAmount: Number(x.wagerAmount ?? 0),
+      username: String(x.username ?? ""),
+      wagerAmountRaw: Number(x.wagerAmount ?? 0),
     }))
-    .sort((a, b) => b.wagerAmount - a.wagerAmount);
+    .sort((a, b) => b.wagerAmountRaw - a.wagerAmountRaw);
+
+  // Solo enviamos username + rank (monto privado)
+  const entries = ordered.map((x, idx) => ({
+    rank: idx + 1,
+    username: x.username,
+  }));
 
   const payload = {
     updatedAt: new Date().toISOString(),
@@ -56,7 +57,7 @@ async function buildLeaderboard(cacheKey) {
   return payload;
 }
 
-// Mantengo tu endpoint original
+// Endpoint original
 app.get("/leaderboards/main", async (req, res) => {
   try {
     const payload = await buildLeaderboard("main");
@@ -66,7 +67,7 @@ app.get("/leaderboards/main", async (req, res) => {
   }
 });
 
-// Nuevos endpoints por periodo (por ahora usan el mismo origen; después puedes adaptar lógica real)
+// Endpoints por periodo (diario/semanal/mensual)
 app.get("/leaderboards/:periodo", async (req, res) => {
   const p = String(req.params.periodo || "").toLowerCase();
   const allowed = new Set(["diario", "semanal", "mensual"]);

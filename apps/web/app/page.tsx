@@ -1,4 +1,4 @@
-type Entry = { username: string; wagerAmount: number };
+type Entry = { rank: number; username: string };
 type LeaderboardResponse = { updatedAt?: string; entries: Entry[] };
 
 type Bonus = {
@@ -12,10 +12,6 @@ type Bonus = {
 };
 
 type BonusesResponse = { updatedAt?: string; bonuses: Bonus[] };
-
-function formatCL(n: number) {
-  return Math.round(n).toLocaleString("es-CL");
-}
 
 export default async function HomePage() {
   const base = process.env.NEXT_PUBLIC_API_BASE ?? "http://localhost:3001";
@@ -36,7 +32,7 @@ export default async function HomePage() {
             TierSlot: rankings, bonos y lealtad en un solo lugar
           </h1>
           <p className="mt-4 text-sm md:text-base text-white/80">
-            Revisa clasificaciones por total apostado, explora bonos y sube de nivel con tu actividad.
+            Revisa clasificaciones, explora bonos y sube de nivel con tu actividad.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
@@ -85,10 +81,10 @@ export default async function HomePage() {
             </thead>
             <tbody className="text-sm">
               {top.map((e, i) => (
-                <tr key={`${e.username}-${i}`} className="border-t border-white/10">
-                  <td className="px-6 py-4">{i + 1}</td>
+                <tr key={`${e.username}-${e.rank}-${i}`} className="border-t border-white/10">
+                  <td className="px-6 py-4">{e.rank ?? i + 1}</td>
                   <td className="px-6 py-4 font-medium">{e.username}</td>
-                  <td className="px-6 py-4 text-right tabular-nums">{formatCL(e.wagerAmount)}</td>
+                  <td className="px-6 py-4 text-right text-white/60">Privado</td>
                 </tr>
               ))}
 
@@ -101,6 +97,10 @@ export default async function HomePage() {
               ) : null}
             </tbody>
           </table>
+        </div>
+
+        <div className="text-xs text-white/60">
+          * El monto apostado se mantiene privado.
         </div>
       </section>
 

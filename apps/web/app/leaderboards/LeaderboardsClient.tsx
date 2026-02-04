@@ -5,16 +5,11 @@ import { Tabs } from "../components/ui/Tabs";
 import { Input } from "../components/ui/Input";
 import { Pagination } from "../components/ui/Pagination";
 import { Skeleton } from "../components/ui/Skeleton";
-import { Badge } from "../components/ui/Badge";
 
-type Entry = { username: string; wagerAmount: number };
+type Entry = { rank: number; username: string };
 type ApiResponse = { updatedAt?: string; entries: Entry[] };
 
 type Periodo = "diario" | "semanal" | "mensual";
-
-function formatCL(n: number) {
-  return Math.round(n).toLocaleString("es-CL");
-}
 
 export default function LeaderboardsClient() {
   const base = process.env.NEXT_PUBLIC_API_BASE ?? "http://localhost:3001";
@@ -25,8 +20,6 @@ export default function LeaderboardsClient() {
   const [error, setError] = useState<string | null>(null);
 
   const [q, setQ] = useState("");
-  const [orden, setOrden] = useState<"desc" | "asc">("desc");
-
   const [page, setPage] = useState(1);
   const pageSize = 25;
 
@@ -46,34 +39,24 @@ export default function LeaderboardsClient() {
     }
   }
 
-  // carga inicial + cuando cambia periodo
   useEffect(() => {
     setPage(1);
     cargar();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [periodo]);
 
-  // auto-refresh (cada 35s aprox, como tu cache backend)
   useEffect(() => {
-    const t = setInterval(() => {
-      cargar();
-    }, 35000);
+    const t = setInterval(() => cargar(), 35000);
     return () => clearInterval(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [periodo]);
 
   const rows = useMemo(() => {
     const list = data?.entries ?? [];
-    const filtered = q.trim()
-      ? list.filter((x) => x.username.toLowerCase().includes(q.trim().toLowerCase()))
-      : list;
-
-    const sorted = [...filtered].sort((a, b) =>
-      orden === "desc" ? b.wagerAmount - a.wagerAmount : a.wagerAmount - b.wagerAmount
-    );
-
-    return sorted;
-  }, [data, q, orden]);
+    const qq = q.trim().toLowerCase();
+    if (!qq) return list;
+    return list.filter((x) => x.username.toLowerCase().includes(qq));
+  }, [data, q]);
 
   const total = rows.length;
   const start = (page - 1) * pageSize;
@@ -106,43 +89,28 @@ export default function LeaderboardsClient() {
             />
           </div>
 
-          <div className="flex items-center gap-2">
-            <Badge
-              active={orden === "desc"}
-              onClick={() => setOrden("desc")}
-            >
-              Mayor → menor
-            </Badge>
-            <Badge
-              active={orden === "asc"}
-              onClick={() => setOrden("asc")}
-            >
-              Menor → mayor
-            </Badge>
-
-            <button
-              type="button"
-              onClick={cargar}
-              className="rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-sm text-white hover:bg-white/10 transition"
-            >
-              Actualizar
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={cargar}
+            className="rounded-xl border border-white/20 bg-white/5 px-4 py-2 text-sm text-white/90 hover:bg-white/10 hover:border-white/35 hover:text-white transition"
+          >
+            Actualizar
+          </button>
         </div>
 
         <div className="text-xs text-white/60">
-          Última actualización: {data?.updatedAt ? new Date(data.updatedAt).toLocaleString("es-CL") : "—"}
+          Última actualización:{" "}
+          {data?.updatedAt ? new Date(data.updatedAt).toLocaleString("es-CL") : "—"} • Monto apostado:{" "}
+          <span className="text-white/80">Privado</span>
         </div>
       </header>
 
-      {/* Estados */}
       {error ? (
         <div className="rounded-3xl border border-red-500/30 bg-red-500/10 p-6 text-sm">
           {error}
         </div>
       ) : null}
 
-      {/* Tabla */}
       <section className="rounded-3xl border border-white/10 bg-white/5 overflow-hidden">
         <div className="border-b border-white/10 px-6 py-4 flex items-center justify-between">
           <div className="text-sm text-white/80">
@@ -169,10 +137,10 @@ export default function LeaderboardsClient() {
             </thead>
             <tbody className="text-sm">
               {paged.map((e, i) => (
-                <tr key={`${e.username}-${i}`} className="border-t border-white/10">
-                  <td className="px-6 py-4">{start + i + 1}</td>
+                <tr key={`${e.username}-${e.rank}-${i}`} className="border-t border-white/10">
+                  <td className="px-6 py-4">{e.rank ?? start + i + 1}</td>
                   <td className="px-6 py-4 font-medium">{e.username}</td>
-                  <td className="px-6 py-4 text-right tabular-nums">{formatCL(e.wagerAmount)}</td>
+                  <td className="px-6 py-4 text-right text-white/60">Privado</td>
                 </tr>
               ))}
 
