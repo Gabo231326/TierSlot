@@ -67,7 +67,7 @@ export default async function HomePage() {
           <div className="mt-6 flex flex-wrap gap-3">
             <a
               href="/leaderboards"
-              className="rounded-xl bg-white text-black px-4 py-2 text-sm font-semibold hover:opacity-90"
+              className="rounded-xl border border-white/25 bg-white/10 px-4 py-2 text-sm font-semibold text-white hover:bg-white/15 hover:border-white/35 transition"
             >
               Ver rankings
             </a>
