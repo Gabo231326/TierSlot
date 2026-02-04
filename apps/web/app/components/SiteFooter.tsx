@@ -4,7 +4,6 @@ export default function SiteFooter() {
   return (
     <footer className="mt-20 border-t border-white/10 bg-black/80 text-white">
       <div className="mx-auto max-w-6xl px-4 py-14">
-        {/* Encabezado del footer */}
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div className="flex items-center gap-2">
             <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-white/20">
@@ -18,7 +17,6 @@ export default function SiteFooter() {
           </p>
         </div>
 
-        {/* Contenido */}
         <div className="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-3">
             <div className="text-sm font-semibold">Enlaces</div>
@@ -56,7 +54,6 @@ export default function SiteFooter() {
           </div>
         </div>
 
-        {/* Barra inferior */}
         <div className="mt-12 border-t border-white/10 pt-4 text-xs text-white/60">
           © {new Date().getFullYear()} TierSlot. Todos los derechos reservados.
         </div>
