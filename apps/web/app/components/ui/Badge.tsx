@@ -16,10 +16,10 @@ export function Badge({
       type="button"
       onClick={onClick}
       className={
-        "inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs transition " +
+        "inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm transition " +
         (active
-          ? "border-white/30 bg-white/15 text-white"
-          : "border-white/10 bg-white/5 text-white/80 hover:bg-white/10 hover:text-white")
+          ? "border border-white bg-transparent text-white font-semibold"
+          : "border border-white/40 bg-transparent text-white/80 hover:border-white hover:text-white")
       }
     >
       {children}
