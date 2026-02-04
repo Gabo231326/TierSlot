@@ -1,81 +1,56 @@
-"use client";
-
 import Link from "next/link";
-import { useState } from "react";
 
-export default function SiteHeader() {
-  const [open, setOpen] = useState(false);
-
-  const nav = [
-    { href: "/", label: "Inicio" },
-    { href: "/leaderboards", label: "Rankings" },
-    { href: "/bonuses", label: "Bonos" },
-    { href: "/reviews", label: "Reseñas" },
-    { href: "/loyalty", label: "Lealtad" },
-  ];
-
+export default function SiteFooter() {
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        <Link href="/" className="flex items-center gap-2 font-bold text-lg text-white">
-          <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl border border-white/20">
-            TS
-          </span>
-          TierSlot
-        </Link>
+    <footer className="mt-16 border-t border-white/10 bg-black/80 text-white">
+      <div className="mx-auto max-w-6xl px-4 py-12 grid gap-10 md:grid-cols-4">
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl border border-white/20">
+              TS
+            </span>
+            <div className="font-bold">TierSlot</div>
+          </div>
 
-        <nav className="hidden items-center gap-6 md:flex">
-          {nav.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="text-sm text-white/90 hover:text-white transition"
-            >
-              {l.label}
-            </Link>
-          ))}
+          <p className="text-sm text-white/70">
+            18+ | Juega con responsabilidad. TierSlot no está afiliado a casinos ni proveedores.
+          </p>
+        </div>
 
-          {/* Mi perfil: hover oscuro (NO blanco sólido) */}
-          <Link
-            href="/profile"
-            className="rounded-xl border border-white/20 bg-white/5 px-3 py-2 text-sm text-white/90 hover:bg-white/10 hover:border-white/35 hover:text-white transition"
-          >
-            Mi perfil
-          </Link>
-        </nav>
-
-        <button
-          className="md:hidden rounded-xl border border-white/20 bg-white/5 px-3 py-2 text-sm text-white/90 hover:bg-white/10 hover:border-white/35 hover:text-white transition"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Alternar menú"
-        >
-          Menú
-        </button>
-      </div>
-
-      {open && (
-        <div className="md:hidden border-t border-white/10 bg-black/80">
-          <div className="mx-auto max-w-6xl px-4 py-3 flex flex-col gap-3">
-            {nav.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="text-sm text-white/90 hover:text-white transition"
-              >
-                {l.label}
-              </Link>
-            ))}
-            <Link
-              href="/profile"
-              onClick={() => setOpen(false)}
-              className="rounded-xl border border-white/20 bg-white/5 px-3 py-2 text-sm text-white/90 hover:bg-white/10 hover:border-white/35 hover:text-white transition"
-            >
-              Mi perfil
-            </Link>
+        <div className="space-y-2">
+          <div className="text-sm font-semibold">Enlaces</div>
+          <div className="flex flex-col gap-2 text-sm text-white/80">
+            <Link className="hover:text-white transition" href="/leaderboards">Rankings</Link>
+            <Link className="hover:text-white transition" href="/bonuses">Bonos</Link>
+            <Link className="hover:text-white transition" href="/reviews">Reseñas</Link>
+            <Link className="hover:text-white transition" href="/loyalty">Lealtad</Link>
+            <Link className="hover:text-white transition" href="/profile">Mi perfil</Link>
           </div>
         </div>
-      )}
-    </header>
+
+        <div className="space-y-2">
+          <div className="text-sm font-semibold">Recursos</div>
+          <div className="flex flex-col gap-2 text-sm text-white/80">
+            <Link className="hover:text-white transition" href="/responsible">Juego responsable</Link>
+            <Link className="hover:text-white transition" href="/terms">Términos</Link>
+            <Link className="hover:text-white transition" href="/privacy">Privacidad</Link>
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <div className="text-sm font-semibold">Contacto</div>
+          <div className="flex flex-col gap-2 text-sm text-white/80">
+            <a className="hover:text-white transition" href="#" rel="noreferrer">Discord</a>
+            <a className="hover:text-white transition" href="#" rel="noreferrer">X / Twitter</a>
+          </div>
+        </div>
+      </div>
+
+      <div className="border-t border-white/10">
+        <div className="mx-auto max-w-6xl px-4 py-4 text-xs text-white/60">
+          © {new Date().getFullYear()} TierSlot. Todos los derechos reservados.
+        </div>
+      </div>
+    </footer>
   );
 }
