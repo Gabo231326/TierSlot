@@ -19,17 +19,6 @@ export default function SiteFooter() {
 
         <div className="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-3">
-            <div className="text-sm font-semibold">Enlaces</div>
-            <div className="flex flex-col gap-2 text-sm text-white/80">
-              <Link className="hover:text-white transition" href="/leaderboards">Rankings</Link>
-              <Link className="hover:text-white transition" href="/bonuses">Bonos</Link>
-              <Link className="hover:text-white transition" href="/reviews">Reseñas</Link>
-              <Link className="hover:text-white transition" href="/loyalty">Lealtad</Link>
-              <Link className="hover:text-white transition" href="/profile">Mi perfil</Link>
-            </div>
-          </div>
-
-          <div className="space-y-3">
             <div className="text-sm font-semibold">Recursos</div>
             <div className="flex flex-col gap-2 text-sm text-white/80">
               <Link className="hover:text-white transition" href="/responsible">Juego responsable</Link>
