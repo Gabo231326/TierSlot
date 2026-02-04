@@ -7,14 +7,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// cache simple para evitar rate limit
 const cache = new Map();
 
 async function fetchShuffleStats() {
   const affiliateId = process.env.SHUFFLE_AFFILIATE_ID;
-  if (!affiliateId) {
-    throw new Error("Falta SHUFFLE_AFFILIATE_ID en el archivo .env");
-  }
+  if (!affiliateId) throw new Error("Falta SHUFFLE_AFFILIATE_ID en el archivo .env");
 
   const url = `https://affiliate.shuffle.com/stats/${affiliateId}`;
   const r = await fetch(url);
@@ -33,58 +30,45 @@ async function buildLeaderboard(cacheKey) {
 
   const raw = await fetchShuffleStats();
 
-  // Ordenamos por wagerAmount REAL, pero NO lo mandamos al frontend
+  // Ordenar por wagerAmount real PERO NO enviar monto al frontend
   const ordered = (raw || [])
     .map((x) => ({
-      username: String(x.username ?? ""),
+      username: String(x.username ?? ""),     // ✅ nombre real SIN máscara
       wagerAmountRaw: Number(x.wagerAmount ?? 0),
     }))
     .sort((a, b) => b.wagerAmountRaw - a.wagerAmountRaw);
 
-  // Solo enviamos username + rank (monto privado)
   const entries = ordered.map((x, idx) => ({
     rank: idx + 1,
-    username: x.username,
+    username: x.username, // ✅ visible
   }));
 
-  const payload = {
-    updatedAt: new Date().toISOString(),
-    entries,
-  };
+  const payload = { updatedAt: new Date().toISOString(), entries };
 
-  // cache 35 segundos
   cache.set(cacheKey, { data: payload, expiresAt: Date.now() + 35000 });
   return payload;
 }
 
-// Endpoint original
 app.get("/leaderboards/main", async (req, res) => {
   try {
-    const payload = await buildLeaderboard("main");
-    res.json(payload);
+    res.json(await buildLeaderboard("main"));
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
 });
 
-// Endpoints por periodo (diario/semanal/mensual)
 app.get("/leaderboards/:periodo", async (req, res) => {
   const p = String(req.params.periodo || "").toLowerCase();
   const allowed = new Set(["diario", "semanal", "mensual"]);
-
-  if (!allowed.has(p)) {
-    return res.status(400).json({ error: "Periodo inválido. Usa: diario, semanal o mensual." });
-  }
+  if (!allowed.has(p)) return res.status(400).json({ error: "Periodo inválido. Usa: diario, semanal o mensual." });
 
   try {
-    const payload = await buildLeaderboard(`lb:${p}`);
-    res.json(payload);
+    res.json(await buildLeaderboard(`lb:${p}`));
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
 });
 
-// BONUSES (seed)
 app.get("/bonuses", (req, res) => {
   res.json({
     updatedAt: new Date().toISOString(),
@@ -121,7 +105,4 @@ app.get("/bonuses", (req, res) => {
 });
 
 const PORT = process.env.PORT || 3001;
-
-app.listen(PORT, () => {
-  console.log(`API corriendo en http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`API corriendo en http://localhost:${PORT}`));
