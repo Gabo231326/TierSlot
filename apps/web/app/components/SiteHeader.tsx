@@ -18,7 +18,7 @@ export default function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         <Link href="/" className="flex items-center gap-2 font-bold text-lg text-white">
-          <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl border border-white/20">
+          <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-white/20">
             TS
           </span>
           TierSlot
@@ -26,26 +26,20 @@ export default function SiteHeader() {
 
         <nav className="hidden items-center gap-6 md:flex">
           {nav.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="text-sm text-white/90 hover:text-white transition"
-            >
+            <Link key={l.href} href={l.href} className="text-sm text-white/85 hover:text-white transition">
               {l.label}
             </Link>
           ))}
-
-          {/* Mi perfil: hover oscuro (NO blanco) */}
           <Link
             href="/profile"
-            className="rounded-xl border border-white/20 bg-white/5 px-3 py-2 text-sm text-white/90 hover:bg-white/10 hover:border-white/30 hover:text-white transition"
+            className="rounded-xl border border-white/20 bg-white/5 px-3 py-2 text-sm text-white/90 hover:bg-white/10 hover:border-white/35 hover:text-white transition"
           >
             Mi perfil
           </Link>
         </nav>
 
         <button
-          className="md:hidden rounded-xl border border-white/20 bg-white/5 px-3 py-2 text-sm text-white/90 hover:bg-white/10 hover:border-white/30 hover:text-white transition"
+          className="md:hidden rounded-xl border border-white/20 bg-white/5 px-3 py-2 text-sm text-white/90 hover:bg-white/10 hover:border-white/35 hover:text-white transition"
           onClick={() => setOpen((v) => !v)}
           aria-label="Alternar menú"
         >
@@ -61,7 +55,7 @@ export default function SiteHeader() {
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="text-sm text-white/90 hover:text-white transition"
+                className="text-sm text-white/85 hover:text-white transition"
               >
                 {l.label}
               </Link>
@@ -69,7 +63,7 @@ export default function SiteHeader() {
             <Link
               href="/profile"
               onClick={() => setOpen(false)}
-              className="rounded-xl border border-white/20 bg-white/5 px-3 py-2 text-sm text-white/90 hover:bg-white/10 hover:border-white/30 hover:text-white transition"
+              className="rounded-xl border border-white/20 bg-white/5 px-3 py-2 text-sm text-white/90 hover:bg-white/10 hover:border-white/35 hover:text-white transition"
             >
               Mi perfil
             </Link>

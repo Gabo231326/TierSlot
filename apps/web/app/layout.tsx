@@ -4,7 +4,7 @@ import SiteFooter from "./components/SiteFooter";
 
 export const metadata = {
   title: "TierSlot",
-  description: "Clasificaciones, bonos y lealtad en un solo lugar",
+  description: "Rankings, bonos y lealtad en un solo lugar",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -12,7 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="es">
       <body className="min-h-screen bg-gradient-to-b from-black via-zinc-950 to-black text-white">
         <SiteHeader />
-        <div className="mx-auto max-w-6xl px-4 py-10">{children}</div>
+        <main className="mx-auto max-w-6xl px-4 py-10">{children}</main>
         <SiteFooter />
       </body>
     </html>
