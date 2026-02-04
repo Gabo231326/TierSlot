@@ -70,3 +70,29 @@ td[class*="wager"] {
   color: #FFFFFF !important;
   opacity: 1 !important;
 }
+
+/* ==========================
+   Selección de texto (evitar fondo blanco en modo oscuro)
+   ========================== */
+::selection {
+  background: rgba(99, 102, 241, 0.35); /* índigo suave */
+  color: #ffffff; /* texto siempre visible */
+}
+
+::-moz-selection {
+  background: rgba(99, 102, 241, 0.35);
+  color: #ffffff;
+}
+
+/* Opcional: selección dentro de inputs/textarea (por si el navegador lo pone blanco) */
+input::selection,
+textarea::selection {
+  background: rgba(99, 102, 241, 0.35);
+  color: #ffffff;
+}
+
+input::-moz-selection,
+textarea::-moz-selection {
+  background: rgba(99, 102, 241, 0.35);
+  color: #ffffff;
+}
