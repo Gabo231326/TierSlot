@@ -16,8 +16,6 @@ function maskUsername(u = "") {
   return `${u[0]}${"*".repeat(Math.max(3, u.length - 2))}${u[u.length - 1]}`;
 }
 
-
-
 async function fetchShuffleStats() {
   const affiliateId = process.env.SHUFFLE_AFFILIATE_ID;
   if (!affiliateId) {
@@ -35,42 +33,57 @@ async function fetchShuffleStats() {
   return await r.json();
 }
 
-app.get("/leaderboards/main", async (req, res) => {
-  const cacheKey = "main";
-
+async function buildLeaderboard(cacheKey) {
   const hit = cache.get(cacheKey);
-  if (hit && Date.now() < hit.expiresAt) {
-    return res.json(hit.data);
-  }
+  if (hit && Date.now() < hit.expiresAt) return hit.data;
 
+  const raw = await fetchShuffleStats();
+
+  const entries = (raw || [])
+    .map((x) => ({
+      username: maskUsername(x.username),
+      wagerAmount: Number(x.wagerAmount ?? 0),
+    }))
+    .sort((a, b) => b.wagerAmount - a.wagerAmount);
+
+  const payload = {
+    updatedAt: new Date().toISOString(),
+    entries,
+  };
+
+  // cache 35 segundos
+  cache.set(cacheKey, { data: payload, expiresAt: Date.now() + 35000 });
+  return payload;
+}
+
+// Mantengo tu endpoint original
+app.get("/leaderboards/main", async (req, res) => {
   try {
-    const raw = await fetchShuffleStats();
-
-    const entries = (raw || [])
-      .map((x) => ({
-        username: maskUsername(x.username),
-        wagerAmount: Number(x.wagerAmount ?? 0),
-      }))
-      .sort((a, b) => b.wagerAmount - a.wagerAmount);
-
-    const payload = {
-      updatedAt: new Date().toISOString(),
-      entries,
-    };
-
-    // cache 35 segundos
-    cache.set(cacheKey, {
-      data: payload,
-      expiresAt: Date.now() + 35000,
-    });
-
+    const payload = await buildLeaderboard("main");
     res.json(payload);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
 });
 
-// BONUSES (por ahora "seed" en el backend; luego lo pasamos a DB)
+// Nuevos endpoints por periodo (por ahora usan el mismo origen; después puedes adaptar lógica real)
+app.get("/leaderboards/:periodo", async (req, res) => {
+  const p = String(req.params.periodo || "").toLowerCase();
+  const allowed = new Set(["diario", "semanal", "mensual"]);
+
+  if (!allowed.has(p)) {
+    return res.status(400).json({ error: "Periodo inválido. Usa: diario, semanal o mensual." });
+  }
+
+  try {
+    const payload = await buildLeaderboard(`lb:${p}`);
+    res.json(payload);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// BONUSES (seed)
 app.get("/bonuses", (req, res) => {
   res.json({
     updatedAt: new Date().toISOString(),
@@ -105,7 +118,6 @@ app.get("/bonuses", (req, res) => {
     ],
   });
 });
-
 
 const PORT = process.env.PORT || 3001;
 
