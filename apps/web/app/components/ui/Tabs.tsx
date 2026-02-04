@@ -28,8 +28,8 @@ export function Tabs<T extends string>({
             className={
               "rounded-xl px-3 py-2 text-sm transition border " +
               (active
-                ? "border-white/25 bg-white/10 text-white font-semibold"
-                : "border-transparent bg-transparent text-white/80 hover:border-white/15 hover:bg-white/5 hover:text-white")
+                ? "border-white/35 bg-white/10 text-white font-semibold"
+                : "border-transparent bg-transparent text-white/80 hover:border-white/20 hover:bg-white/5 hover:text-white")
             }
           >
             {it.label}

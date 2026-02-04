@@ -1,50 +1,81 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 
-export default function SiteFooter() {
+export default function SiteHeader() {
+  const [open, setOpen] = useState(false);
+
+  const nav = [
+    { href: "/", label: "Inicio" },
+    { href: "/leaderboards", label: "Rankings" },
+    { href: "/bonuses", label: "Bonos" },
+    { href: "/reviews", label: "Reseñas" },
+    { href: "/loyalty", label: "Lealtad" },
+  ];
+
   return (
-    <footer className="mt-16 border-t border-white/10 bg-black/80 text-white">
-      <div className="mx-auto max-w-6xl px-4 py-12 grid gap-10 md:grid-cols-4">
-        <div className="space-y-2">
-          <div className="font-bold">TierSlot</div>
-          <p className="text-sm text-white/70">
-            18+ | Juega con responsabilidad. TierSlot no está afiliado a casinos ni proveedores.
-          </p>
-        </div>
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+        <Link href="/" className="flex items-center gap-2 font-bold text-lg text-white">
+          <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl border border-white/20">
+            TS
+          </span>
+          TierSlot
+        </Link>
 
-        <div className="space-y-2">
-          <div className="text-sm font-semibold">Enlaces</div>
-          <div className="flex flex-col gap-2 text-sm text-white/80">
-            <Link href="/leaderboards">Rankings</Link>
-            <Link href="/bonuses">Bonos</Link>
-            <Link href="/reviews">Reseñas</Link>
-            <Link href="/loyalty">Lealtad</Link>
-            <Link href="/profile">Mi perfil</Link>
-          </div>
-        </div>
+        <nav className="hidden items-center gap-6 md:flex">
+          {nav.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className="text-sm text-white/90 hover:text-white transition"
+            >
+              {l.label}
+            </Link>
+          ))}
 
-        <div className="space-y-2">
-          <div className="text-sm font-semibold">Recursos</div>
-          <div className="flex flex-col gap-2 text-sm text-white/80">
-            <Link href="/responsible">Juego responsable</Link>
-            <Link href="/terms">Términos</Link>
-            <Link href="/privacy">Privacidad</Link>
-          </div>
-        </div>
+          {/* Mi perfil: hover oscuro (NO blanco sólido) */}
+          <Link
+            href="/profile"
+            className="rounded-xl border border-white/20 bg-white/5 px-3 py-2 text-sm text-white/90 hover:bg-white/10 hover:border-white/35 hover:text-white transition"
+          >
+            Mi perfil
+          </Link>
+        </nav>
 
-        <div className="space-y-2">
-          <div className="text-sm font-semibold">Contacto</div>
-          <div className="flex flex-col gap-2 text-sm text-white/80">
-            <a href="#" className="hover:text-white">Discord</a>
-            <a href="#" className="hover:text-white">X / Twitter</a>
-          </div>
-        </div>
+        <button
+          className="md:hidden rounded-xl border border-white/20 bg-white/5 px-3 py-2 text-sm text-white/90 hover:bg-white/10 hover:border-white/35 hover:text-white transition"
+          onClick={() => setOpen((v) => !v)}
+          aria-label="Alternar menú"
+        >
+          Menú
+        </button>
       </div>
 
-      <div className="border-t border-white/10">
-        <div className="mx-auto max-w-6xl px-4 py-4 text-xs text-white/60">
-          © {new Date().getFullYear()} TierSlot. Todos los derechos reservados.
+      {open && (
+        <div className="md:hidden border-t border-white/10 bg-black/80">
+          <div className="mx-auto max-w-6xl px-4 py-3 flex flex-col gap-3">
+            {nav.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="text-sm text-white/90 hover:text-white transition"
+              >
+                {l.label}
+              </Link>
+            ))}
+            <Link
+              href="/profile"
+              onClick={() => setOpen(false)}
+              className="rounded-xl border border-white/20 bg-white/5 px-3 py-2 text-sm text-white/90 hover:bg-white/10 hover:border-white/35 hover:text-white transition"
+            >
+              Mi perfil
+            </Link>
+          </div>
         </div>
-      </div>
-    </footer>
+      )}
+    </header>
   );
 }
