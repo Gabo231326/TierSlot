@@ -26,10 +26,10 @@ export function Tabs<T extends string>({
             type="button"
             onClick={() => onChange(it.key)}
             className={
-              "rounded-xl px-3 py-2 text-sm transition " +
+              "rounded-xl px-3 py-2 text-sm transition border " +
               (active
-                ? "bg-white text-black"
-                : "text-white/80 hover:text-white hover:bg-white/10")
+                ? "border-white/25 bg-white/10 text-white font-semibold"
+                : "border-transparent bg-transparent text-white/80 hover:border-white/15 hover:bg-white/5 hover:text-white")
             }
           >
             {it.label}

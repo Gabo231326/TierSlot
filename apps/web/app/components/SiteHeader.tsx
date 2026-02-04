@@ -26,20 +26,26 @@ export default function SiteHeader() {
 
         <nav className="hidden items-center gap-6 md:flex">
           {nav.map((l) => (
-            <Link key={l.href} href={l.href} className="text-sm text-white/90 hover:text-white">
+            <Link
+              key={l.href}
+              href={l.href}
+              className="text-sm text-white/90 hover:text-white transition"
+            >
               {l.label}
             </Link>
           ))}
+
+          {/* Mi perfil: hover oscuro (NO blanco) */}
           <Link
             href="/profile"
-            className="rounded-xl border border-white/20 px-3 py-2 text-sm text-white hover:bg-white hover:text-black transition"
+            className="rounded-xl border border-white/20 bg-white/5 px-3 py-2 text-sm text-white/90 hover:bg-white/10 hover:border-white/30 hover:text-white transition"
           >
             Mi perfil
           </Link>
         </nav>
 
         <button
-          className="md:hidden rounded-xl border border-white/20 px-3 py-2 text-sm text-white"
+          className="md:hidden rounded-xl border border-white/20 bg-white/5 px-3 py-2 text-sm text-white/90 hover:bg-white/10 hover:border-white/30 hover:text-white transition"
           onClick={() => setOpen((v) => !v)}
           aria-label="Alternar menú"
         >
@@ -55,7 +61,7 @@ export default function SiteHeader() {
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="text-sm text-white/90 hover:text-white"
+                className="text-sm text-white/90 hover:text-white transition"
               >
                 {l.label}
               </Link>
@@ -63,7 +69,7 @@ export default function SiteHeader() {
             <Link
               href="/profile"
               onClick={() => setOpen(false)}
-              className="rounded-xl border border-white/20 px-3 py-2 text-sm text-white"
+              className="rounded-xl border border-white/20 bg-white/5 px-3 py-2 text-sm text-white/90 hover:bg-white/10 hover:border-white/30 hover:text-white transition"
             >
               Mi perfil
             </Link>
